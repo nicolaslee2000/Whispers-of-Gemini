@@ -1,15 +1,20 @@
-"use client"
+'use client';
 
-import Image from "next/image";
-import styles from "./page.module.css";
+import Image from 'next/image';
+import styles from './page.module.css';
 import React, { useState } from 'react';
-
+import runChat from '@/gemini/gemini';
 
 export default function Home() {
   const [inputValue, setInputValue] = useState('');
 
-  const handleInputChange = (event : any) => {
+  const handleInputChange = (event: any) => {
     setInputValue(event.target.value);
+  };
+
+  const handleButtonChange = async (event: any) => {
+    const result = await runChat('Funny joke');
+    console.log(result);
   };
 
   return (
@@ -17,7 +22,7 @@ export default function Home() {
       <div className={styles.description}>
         <p>{inputValue}</p>
         <input
-          type="text"
+          type='text'
           value={inputValue}
           onChange={handleInputChange}
         ></input>
@@ -25,8 +30,8 @@ export default function Home() {
       <div className={styles.grid}>
         <a
           className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+          target='_blank'
+          rel='noopener noreferrer'
         >
           <h2>
             Button1 <span>-&gt;</span>
@@ -36,8 +41,8 @@ export default function Home() {
 
         <a
           className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+          target='_blank'
+          rel='noopener noreferrer'
         >
           <h2>
             Button2 <span>-&gt;</span>
@@ -47,8 +52,8 @@ export default function Home() {
 
         <a
           className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+          target='_blank'
+          rel='noopener noreferrer'
         >
           <h2>
             Button3 <span>-&gt;</span>
@@ -58,16 +63,15 @@ export default function Home() {
 
         <a
           className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
+          target='_blank'
+          rel='noopener noreferrer'
         >
           <h2>
             Button4 <span>-&gt;</span>
           </h2>
-          <p>
-            func4()
-          </p>
+          <p>func4()</p>
         </a>
+        <button onClick={handleButtonChange}>test button</button>
       </div>
     </main>
   );
